@@ -14,23 +14,51 @@ public class Tree {
 
     private void initExampleTree() {
 
-        for(int i = 0; i < 20; i++) {
+        for(int i = 0; i < 10; i++) {
             addNode(new Node((int)(Math.random()*100)));
         }
-
 /*        addNode(new Node(10));
-        addNode(new Node(6));
+        addNode(new Node(13));
         addNode(new Node(16));
+        addNode(new Node(20));*/
+        /*addNode(new Node(6));
         addNode(new Node(3));
         addNode(new Node(8));
-        addNode(new Node(13));
-        addNode(new Node(20));
         addNode(new Node(9));
         addNode(new Node(7));
         addNode(new Node(5));
         addNode(new Node(2));
         addNode(new Node(9));*/
     }
+
+    public void belowBalanceTree(Node node) {
+        if(node != null) {
+            if (!node.isLeaf()) {
+                belowBalanceTree(node.getLeftNode());
+                belowBalanceTree(node.getRightNode());
+            }
+            balanceSubTree(node);
+        }
+    }
+
+    private void balanceSubTree(Node node) {
+        int nodeBalance = checkNodeBalance(node);
+        if(Math.abs(nodeBalance) > 1) {
+            if(nodeBalance > 0) {
+
+            } else {
+
+            }
+        }
+    }
+
+    public int checkNodeBalance(Node node) {
+        return (node.hasTwins()) ? belowCountLevels(headNode.getLeftNode()) - belowCountLevels(headNode.getRightNode()) :
+                (node.getRightNode() != null) ? -1*belowCountLevels(headNode.getRightNode()) :
+                        belowCountLevels(headNode.getLeftNode());
+    }
+
+
 
     public Node addNode(Node node) {
         return (headNode != null) ? belowAddNode(headNode, node) : (headNode = node);
