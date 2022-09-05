@@ -14,21 +14,53 @@ public class Tree {
 
     private void initExampleTree() {
 
-        for(int i = 0; i < 10; i++) {
+/*        for(int i = 0; i < 10; i++) {
             addNode(new Node((int)(Math.random()*100)));
-        }
-/*        addNode(new Node(10));
-        addNode(new Node(13));
-        addNode(new Node(16));
-        addNode(new Node(20));*/
-        /*addNode(new Node(6));
+        }*/
+/*        Node node20 = new Node(20);
+        Node node16 = new Node(16);
+        Node node13 = new Node(13);
+        Node node15 = new Node(15);
+        Node node4 = new Node(4);
+        Node node8 = new Node(8);
+        addNode(new Node(10));
+        addNode(node16);
+        addNode(node13);
+        addNode(node20);
+        addNode(new Node(6));
         addNode(new Node(3));
-        addNode(new Node(8));
+        addNode(node8);
         addNode(new Node(9));
         addNode(new Node(7));
         addNode(new Node(5));
         addNode(new Node(2));
-        addNode(new Node(9));*/
+        addNode(node15);
+        addNode(node4);*/
+
+    }
+
+    public Node nodeExists(Node node) { //Perfectly Working
+        return (headNode == null) ? null : belowNodeExists(headNode, node);
+    }
+
+    private Node belowNodeExists(Node node, Node testNode) {
+        if(node == testNode) {
+            return node;
+        } else {
+            if(node.isLeaf()) {
+                return null;
+            } else {
+                if(node.hasTwins()) {
+                    Node resultingNodeByLeft = belowNodeExists(node.getLeftNode(), testNode);
+                    Node resultingNodeByRight = belowNodeExists(node.getRightNode(), testNode);
+                    return (resultingNodeByLeft == null && resultingNodeByRight == null) ? null: (resultingNodeByLeft != null) ? resultingNodeByLeft : resultingNodeByRight ;
+                } else if(node.getRightNode() != null){
+                    return belowNodeExists(node.getRightNode(), testNode);
+                } else {
+                    return belowNodeExists(node.getLeftNode(), testNode);
+                }
+            }
+        }
     }
 
     public void belowBalanceTree(Node node) {
@@ -45,7 +77,9 @@ public class Tree {
         int nodeBalance = checkNodeBalance(node);
         if(Math.abs(nodeBalance) > 1) {
             if(nodeBalance > 0) {
+                if(node.getRightNode().getLeftNode() == null) {
 
+                }
             } else {
 
             }
@@ -60,7 +94,7 @@ public class Tree {
 
 
 
-    public Node addNode(Node node) {
+    public Node addNode(Node node) { //Perfectly Working
         return (headNode != null) ? belowAddNode(headNode, node) : (headNode = node);
     }
 
@@ -84,7 +118,7 @@ public class Tree {
         }
     }
 
-    public int countLevels() {
+    public int countLevels() { //Perfectly Working
         return (headNode == null) ? 0 : belowCountLevels(headNode);
     }
 

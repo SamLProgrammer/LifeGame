@@ -25,7 +25,7 @@ public class TreePanel extends JPanel {
         double width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         double height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
-        double diameter = width/Math.pow(2,tree.countLevels()-1);
+        double diameter = width/Math.pow(2,tree.countLevels());
         double radius = diameter/2;
         belowPaintTree(g2, tree.getHeadNode(), (int)radius, 0, (int)width, 10 );
         g2.setColor(Color.red);
