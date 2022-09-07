@@ -23,7 +23,8 @@ public class Tree {
         Node node15 = new Node(15);
         Node node4 = new Node(4);
         Node node8 = new Node(8);
-        addNode(new Node(10));
+        Node node10 = new Node(10);
+        addNode(node10);
         addNode(node16);
         addNode(node13);
         addNode(node20);
@@ -36,7 +37,26 @@ public class Tree {
         addNode(new Node(2));
         addNode(node15);
         addNode(node4);*/
+    }
 
+    private Node belowFatherNode(Node currentNode, Node childNode) {
+        if(currentNode.getRightNode() == childNode || currentNode.getLeftNode() == childNode) {
+            return currentNode;
+        } else {
+            if(currentNode.isLeaf()) {
+                return null;
+            } else {
+                if(currentNode.hasTwins()) {
+                    Node resultingNodeByLeft = belowFatherNode(currentNode.getLeftNode(), childNode);
+                    Node resultingNodeByRight = belowFatherNode(currentNode.getRightNode(), childNode);
+                    return (resultingNodeByLeft == null && resultingNodeByRight == null) ? null : (resultingNodeByRight != null) ? resultingNodeByRight : resultingNodeByLeft;
+                } else if(currentNode.getRightNode() != null){
+                    return belowFatherNode(currentNode.getRightNode(), childNode);
+                } else {
+                    return belowFatherNode(currentNode.getLeftNode(), childNode);
+                }
+            }
+        }
     }
 
     public Node nodeExists(Node node) { //Perfectly Working
